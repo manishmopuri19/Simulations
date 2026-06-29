@@ -2,7 +2,7 @@ import pygame
 
 class particle:
 
-    def __init__(self,x,y,vx,vy,radius=5,mass=1):
+    def __init__(self,x,y,vx,vy,radius=5,mass=2):
         self.x=x
         self.y=y
         self.vx=vx
