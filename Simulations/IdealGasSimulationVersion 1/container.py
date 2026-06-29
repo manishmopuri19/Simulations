@@ -27,5 +27,5 @@ class Container:
     
     def draw(self,screen):
         pygame.draw.rect(
-            screen,(255,255,255),(self.x,self.y,self,width,self.height),width=2
+            screen,(255,255,255),(self.x,self.y,self.width,self.height),width=2
         )
