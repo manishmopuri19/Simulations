@@ -16,21 +16,29 @@ class Particle:
     
     def bounce_from_wall(self, container):
 
+        collided = False
+
         if self.x - self.radius <= container.left:
             self.x = container.left + self.radius
             self.vx *= -1
+            collided = True
 
         if self.x + self.radius >= container.right:
             self.x = container.right - self.radius
             self.vx *= -1
-
+            collided = True
         if self.y - self.radius <= container.top:
             self.y = container.top + self.radius
             self.vy *= -1
+            collided = True
 
         if self.y + self.radius >= container.bottom:
             self.y = container.bottom - self.radius
             self.vy *= -1 
+            collided = True
+        
+        return collided
+
     def draw(self,screen,color):
         pygame.draw.circle(
             screen,color,(int(self.x),int(self.y)),
