@@ -1,67 +1,36 @@
-from container import Container
-from particle import Particle
-
 import pygame
-import random
+
+from simulation import Simulation
 
 pygame.init()
 
-WIDTH=1000
-HEIGHT=700
+WIDTH = 1400
+HEIGHT = 800
 
-screen=pygame.display.set_mode((WIDTH,HEIGHT))
-pygame.display.set_caption("Ideal Gas Simulation - version 1")
-clock=  pygame.time.Clock()
-FPS=60
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Ideal Gas Simulation - Version 2")
 
-container=Container(
-    x=100,y=50,width=800,height=600
-)
+clock = pygame.time.Clock()
 
-particles= []
+simulation = Simulation()
 
-Num_particles=100
-
-for i in range(Num_particles):
-    x=random.randint(
-        container.left+10,
-        container.right-10
-    )
-
-    y=random.randint(
-        container.top+10,
-        container.bottom-10
-    )
-
-    vx=random.uniform(-4,4)
-    vy=random.uniform(-4,4)
-
-    particle=Particle(
-        x,y,vx,vy
-    )
-
-    particles.append(particle)
-running=True
+running = True
 
 while running:
+
+    dt = clock.tick(60) / 1000
+
     for event in pygame.event.get():
-        if event.type==pygame.QUIT:
-            running=False
-    
-    screen.fill((25,25,35))
 
-    for particle in particles:
-        particle.move(dt=1)
-        particle.bounce_from_wall(container)
+        if event.type == pygame.QUIT:
+            running = False
 
-    container.draw(screen)
-    for particle in particles:
-        particle.draw(
-            screen,(80,180,255)
-        )
+    screen.fill((20,20,25))
+
+    simulation.update(dt)
+
+    simulation.draw(screen)
 
     pygame.display.flip()
 
-    clock.tick(FPS)
-    
 pygame.quit()
